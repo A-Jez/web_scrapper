@@ -53,15 +53,23 @@ class PostgresPipeline(object):
         )
     
     def open_spider(self, spider):
-        self.client = psycopg2.connect(
-            database=self.db_name,
-            host=self.db_host,
-            port=self.db_port,
-            user=self.db_user,
-            password=self.db_passwd
+        print(
+            "DATA: ",
+            self.db_name,
+            self.db_host,
+            self.db_port,
+            self.db_user,
+            self.db_passwd
         )
+        # self.client = psycopg2.connect(
+        #     database=self.db_name,
+        #     host=self.db_host,
+        #     port=self.db_port,
+        #     user=self.db_user,
+        #     password=self.db_passwd
+        # )
 
-        print(self.client)
+        # print(self.client)
     
     def close_spider(self, spider):
         print('asdasd')
