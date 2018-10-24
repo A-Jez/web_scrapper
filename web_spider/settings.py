@@ -21,10 +21,12 @@ NEWSPIDER_MODULE = 'web_spider.spiders'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
-DB_HOST="horton.elephantsql.com"
 
-DB_USER='TOMEK'
-DB_PASSWD=''
+DB_HOST="horton.elephantsql.com"
+DB_USER="zpxkvnly"
+DB_NAME="zpxkvnly"
+DB_PORT="5432"
+DB_PASSWD="OIDJjqbe16INycMC2R725YrgYkxsZjdt"
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
