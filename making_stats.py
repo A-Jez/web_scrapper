@@ -1,13 +1,13 @@
 from collections import Counter
 from os import listdir
 from string import punctuation
-import matplotlib.pyplot as plt
+from matplotlib import pyplot as plt
 import numpy as np
 
 
-INPUT_FOLDER = 'articles'
+INPUT_FOLDER = 'articles_3'
 MOST_COMMON_CNT = 20
-PLOT_GRANUALITY = 100000
+PLOT_GRANUALITY = 10000
 
 GRANUAL_CNT = {}
 GLOBAL_CNT = Counter()
@@ -83,7 +83,6 @@ def wordsChart():
     plt.title('3')
     plt.show()
 
-
+pieChart()
 incrChart()
 wordsChart()
-pieChart()

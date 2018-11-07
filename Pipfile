@@ -10,6 +10,7 @@ scrapy = "*"
 pylint = "*"
 matplotlib = "*"
 numpy = "*"
+jupyter = "*"
 
 [dev-packages]
 
