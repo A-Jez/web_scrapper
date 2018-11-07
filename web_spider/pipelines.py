@@ -6,31 +6,35 @@
 # See: https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
 import psycopg2
+import uuid
+import os
 
-class WebSpiderPipeline(object):
-    
-    def __init__(self, db_user, db_url, db_passwd):
-        self.db_user = db_user
-        self,db_url = db_url
-        self.db_passwd = db_passwd
-    
+class SaveArticlePipeline(object):
+
+    def __init__(self, article_path):
+        self.article_path = article_path
+        if not os.path.exists(self.article_path):
+            os.makedirs(self.article_path)
+
     @classmethod
     def from_crawler(cls, crawler):
         return cls(
-            db_user=crawler.settings.get('DB_USER'),
-            db_url=crawler.settings.get('DB_URL'),
-            db_passwd=crawler.settings.get('DB_PASSWD')
+            article_path=crawler.settings.get('ARTICLES_DIRECTORY', 'articles')
         )
-    
+
     def open_spider(self, spider):
         print(spider)
     
     def close_spider(self, spider):
         print('asdasd')
         pass
-    
+
     def process_item(self, item, spider):
-        # print(item)
+        url = item.get('url').split('/').pop()
+        file_name = f"{url.split('?')[0]}_{uuid.uuid4()}"
+        print(file_name)
+        with open(os.path.join(self.article_path, file_name), 'w') as f:
+            f.write(item.get('text'))
         return item
 
 
@@ -62,7 +66,8 @@ class PostgresPipeline(object):
                 password=self.db_passwd
             )
             self.db = self.client.cursor();
-            self.db.execute("CREATE TABLE IF NOT EXISTS pk_news (id serial PRIMARY KEY, date varchar, text varchar);")
+            
+            self.db.execute("CREATE TABLE IF NOT EXISTS pure_pc (id serial PRIMARY KEY, date varchar, text varchar);")
         except psycopg2.Error as err:
             print(err)
     
@@ -75,6 +80,4 @@ class PostgresPipeline(object):
             self.db.execute(f'INSERT INTO pk_news (date, text) VALUES (\'{item["time"]}\', \'{item["text"]}\')')
         except psycopg2.Error as err:
             print(f'Error while processing {item}: {err}')
-
-        
         return item

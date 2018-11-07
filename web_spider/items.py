@@ -10,5 +10,5 @@ import scrapy
 
 class WebSpiderItem(scrapy.Item):
     # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+    url = scrapy.Field()
+    article_text = scrapy.Field()

@@ -8,6 +8,8 @@ requests = "*"
 scrapy = "*"
 "psycopg2" = "*"
 pylint = "*"
+matplotlib = "*"
+numpy = "*"
 
 [dev-packages]
 
